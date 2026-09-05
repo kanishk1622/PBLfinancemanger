@@ -1,7 +1,7 @@
 #ifndef LINKEDLIST_H
 #define LINKEDLIST_H
 
-#include "Transaction.h"
+#include "../Transactions/transactions.h"
 
 // Node for storing a Transaction
 struct TransactionNode
