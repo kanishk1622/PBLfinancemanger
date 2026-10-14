@@ -3,25 +3,20 @@
 
 using namespace std;
 
-// Constructor
 TransactionList::TransactionList()
 {
     head = nullptr;
 }
 
-// Insert a transaction at the end of the list
 void TransactionList::insert(const Transaction& transaction)
 {
-    TransactionNode* newNode = new TransactionNode(transaction);
-
-    // If the list is empty
+    TransactionNode* newNode = new TransactionNode(transaction)
     if (head == nullptr)
     {
         head = newNode;
         return;
     }
 
-    // Traverse to the last node
     TransactionNode* temp = head;
 
     while (temp->next != nullptr)
@@ -29,20 +24,17 @@ void TransactionList::insert(const Transaction& transaction)
         temp = temp->next;
     }
 
-    // Add the new node at the end
     temp->next = newNode;
 }
 
-// Remove a transaction using its ID
 bool TransactionList::remove(int transactionId)
 {
-    // If the list is empty
+    
     if (head == nullptr)
     {
         return false;
     }
 
-    // If the first node contains the transaction
     if (head->data.getTransactionId() == transactionId)
     {
         TransactionNode* temp = head;
@@ -53,7 +45,6 @@ bool TransactionList::remove(int transactionId)
         return true;
     }
 
-    // Search for the transaction
     TransactionNode* current = head;
 
     while (current->next != nullptr)
@@ -72,11 +63,9 @@ bool TransactionList::remove(int transactionId)
         current = current->next;
     }
 
-    // Transaction not found
     return false;
 }
 
-// Search for a transaction using its ID
 Transaction* TransactionList::searchById(int transactionId)
 {
     TransactionNode* temp = head;
@@ -94,7 +83,6 @@ Transaction* TransactionList::searchById(int transactionId)
     return nullptr;
 }
 
-// Display all transactions
 void TransactionList::display() const
 {
     TransactionNode* temp = head;
@@ -114,7 +102,6 @@ void TransactionList::display() const
     }
 }
 
-// Return the head of the list
 TransactionNode* TransactionList::getHead() const
 {
     return head;
