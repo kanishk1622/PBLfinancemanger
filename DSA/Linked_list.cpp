@@ -10,7 +10,7 @@ TransactionList::TransactionList()
 
 void TransactionList::insert(const Transaction& transaction)
 {
-    TransactionNode* newNode = new TransactionNode(transaction)
+    TransactionNode* newNode = new TransactionNode(transaction);
     if (head == nullptr)
     {
         head = newNode;
