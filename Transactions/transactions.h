@@ -16,7 +16,6 @@ private:
     string description;
 
 public:
-    // Constructors
     Transaction();
     Transaction(int transactionId,
                 string type,
@@ -42,7 +41,7 @@ public:
     void setAccountName(string AccountName);
     void setDescription(string description);
 
-    // Display transaction
+    // Display 
     void displayTransaction() const;
 };
 
