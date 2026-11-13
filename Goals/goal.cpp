@@ -119,6 +119,30 @@ void Goal::updateGoal()
     cout << "Goal savings updated successfully.\n";
 }
 
+bool Goal::setGoal(int id, const string& name, double target, double savings,
+                   double monthly, const string& date)
+{
+    if (id <= 0 || name.empty() || target <= 0 || savings < 0 || monthly < 0)
+        return false;
+    if (!validDateFormat(date))
+        return false;
+
+    goalId = id;
+    goalName = name;
+    targetAmount = target;
+    currentSavings = savings;
+    monthlySaving = monthly;
+    targetDate = date;
+    return true;
+}
+
+int Goal::getGoalId() const { return goalId; }
+string Goal::getGoalName() const { return goalName; }
+double Goal::getTargetAmount() const { return targetAmount; }
+double Goal::getCurrentSavings() const { return currentSavings; }
+double Goal::getMonthlySaving() const { return monthlySaving; }
+string Goal::getTargetDate() const { return targetDate; }
+
 double Goal::calculateProgress() const
 {
     if (targetAmount <= 0)
@@ -156,9 +180,6 @@ int Goal::calculateRequiredMonths() const
 
 void Goal::displayGoal() const
 {
-    cout << "\n====================================\n";
-    cout << "          FINANCIAL GOAL\n";
-    cout << "====================================\n";
 
     cout << "Goal ID           : " << goalId << '\n';
     cout << "Goal Name         : " << goalName << '\n';

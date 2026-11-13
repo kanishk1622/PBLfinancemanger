@@ -17,12 +17,25 @@ private:
 public:
     Goal();
 
+   
     void createGoal();
     void updateGoal();
 
+   
+    bool setGoal(int id, const string& name, double target, double savings,
+                 double monthly, const string& date);
+
+   
+    int getGoalId() const;
+    string getGoalName() const;
+    double getTargetAmount() const;
+    double getCurrentSavings() const;
+    double getMonthlySaving() const;
+    string getTargetDate() const;
+
     double calculateProgress() const;
     double calculateRemaining() const;
-    int calculateRequiredMonths() const;
+    int calculateRequiredMonths() const;   
 
     void displayGoal() const;
 };
