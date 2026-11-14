@@ -1,13 +1,17 @@
-#include "Investment.h"
+#include "investment.h"
 
 Investment::Investment(string n, double invested, double current, double qty) {
     name = n;
-    amountInvested = invested;
-    currentValue = current;
-    quantity = qty;
+    amountInvested = invested < 0 ? 0 : invested;
+    currentValue = current < 0 ? 0 : current;
+    quantity = qty < 0 ? 0 : qty;
 }
 
 Investment::~Investment() {
+}
+
+bool Investment::isValidInput(const string& n, double invested, double current, double qty) {
+    return !n.empty() && invested > 0 && current >= 0 && qty > 0;
 }
 
 double Investment::getAmountInvested() const {
@@ -26,20 +30,26 @@ string Investment::getName() const {
     return name;
 }
 
-void Investment::updateCurrentValue(double newValue) {
+bool Investment::updateCurrentValue(double newValue) {
+    if (newValue < 0)
+        return false;
+
     currentValue = newValue;
+    return true;
 }
 
 double Investment::profitLoss() const {
     return currentValue - amountInvested;
 }
 
-Stock::Stock(string n, double invested, double current, double qty)
-    : Investment(n, invested, current, qty) {
+double Investment::profitLossPercent() const {
+    if (amountInvested <= 0)
+        return 0;
+    return (profitLoss() / amountInvested) * 100.0;
 }
 
-void Stock::display() const {
-    cout << "\nInvestment Type : Stock";
+void Investment::display() const {
+    cout << "\nInvestment Type : " << getType();   // virtual call
     cout << "\nName            : " << name;
     cout << "\nAmount Invested : " << amountInvested;
     cout << "\nCurrent Value   : " << currentValue;
@@ -52,33 +62,22 @@ void Stock::display() const {
     else
         cout << "\nLoss            : " << -pl;
 
+    cout << " (" << profitLossPercent() << "%)";
     cout << "\n";
+}
+
+// ---------- Derived classes: each only defines its type ----------
+
+Stock::Stock(string n, double invested, double current, double qty)
+    : Investment(n, invested, current, qty) {
 }
 
 string Stock::getType() const {
     return "Stock";
 }
 
-
 MutualFund::MutualFund(string n, double invested, double current, double qty)
     : Investment(n, invested, current, qty) {
-}
-
-void MutualFund::display() const {
-    cout << "\nInvestment Type : Mutual Fund";
-    cout << "\nName            : " << name;
-    cout << "\nAmount Invested : " << amountInvested;
-    cout << "\nCurrent Value   : " << currentValue;
-    cout << "\nQuantity/Units  : " << quantity;
-
-    double pl = profitLoss();
-
-    if (pl >= 0)
-        cout << "\nProfit          : " << pl;
-    else
-        cout << "\nLoss            : " << -pl;
-
-    cout << "\n";
 }
 
 string MutualFund::getType() const {
@@ -89,73 +88,20 @@ FixedDeposit::FixedDeposit(string n, double invested, double current, double qty
     : Investment(n, invested, current, qty) {
 }
 
-void FixedDeposit::display() const {
-    cout << "\nInvestment Type : Fixed Deposit";
-    cout << "\nName            : " << name;
-    cout << "\nAmount Invested : " << amountInvested;
-    cout << "\nCurrent Value   : " << currentValue;
-    cout << "\nQuantity        : " << quantity;
-
-    double pl = profitLoss();
-
-    if (pl >= 0)
-        cout << "\nProfit          : " << pl;
-    else
-        cout << "\nLoss            : " << -pl;
-
-    cout << "\n";
-}
-
 string FixedDeposit::getType() const {
     return "Fixed Deposit";
 }
 
-
 Gold::Gold(string n, double invested, double current, double qty)
     : Investment(n, invested, current, qty) {
-}
-
-void Gold::display() const {
-    cout << "\nInvestment Type : Gold";
-    cout << "\nName            : " << name;
-    cout << "\nAmount Invested : " << amountInvested;
-    cout << "\nCurrent Value   : " << currentValue;
-    cout << "\nQuantity        : " << quantity;
-
-    double pl = profitLoss();
-
-    if (pl >= 0)
-        cout << "\nProfit          : " << pl;
-    else
-        cout << "\nLoss            : " << -pl;
-
-    cout << "\n";
 }
 
 string Gold::getType() const {
     return "Gold";
 }
 
-
 OtherInvestment::OtherInvestment(string n, double invested, double current, double qty)
     : Investment(n, invested, current, qty) {
-}
-
-void OtherInvestment::display() const {
-    cout << "\nInvestment Type : Other";
-    cout << "\nName            : " << name;
-    cout << "\nAmount Invested : " << amountInvested;
-    cout << "\nCurrent Value   : " << currentValue;
-    cout << "\nQuantity        : " << quantity;
-
-    double pl = profitLoss();
-
-    if (pl >= 0)
-        cout << "\nProfit          : " << pl;
-    else
-        cout << "\nLoss            : " << -pl;
-
-    cout << "\n";
 }
 
 string OtherInvestment::getType() const {
