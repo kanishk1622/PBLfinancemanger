@@ -25,7 +25,6 @@ public:
                 string AccountName,
                 string description);
 
-    // Getters
     int getTransactionId() const;
     string getType() const;
     double getAmount() const;
@@ -34,14 +33,16 @@ public:
     string getAccountName() const;
     string getDescription() const;
 
-    // Setters
     void setAmount(double amount);
     void setCategory(string category);
     void setDate(string date);
     void setAccountName(string AccountName);
     void setDescription(string description);
 
-    // Display 
+    // isValidDate checks the format AND the calendar (e.g. rejects 31-02-2026).
+    static bool isValidDate(const string& date);
+    // Returns 0 if the stored date is invalid.
+    int getDateKey() const;
     void displayTransaction() const;
 };
 
