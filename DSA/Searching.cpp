@@ -1,10 +1,28 @@
 #include <iostream>
+#include <cctype>
 #include "Searching.h"
 
 using namespace std;
 
-Transaction* Searching::searchByID(
-    TransactionList& transactions, int id)
+namespace
+{
+    // Case-insensitive comparison so "food" matches "Food".
+    bool equalsIgnoreCase(const string& a, const string& b)
+    {
+        if (a.size() != b.size())
+            return false;
+
+        for (size_t i = 0; i < a.size(); i++)
+        {
+            if (tolower(static_cast<unsigned char>(a[i])) !=
+                tolower(static_cast<unsigned char>(b[i])))
+                return false;
+        }
+        return true;
+    }
+}
+
+Transaction* Searching::searchByID(TransactionList& transactions, int id)
 {
     TransactionNode* current = transactions.getHead();
 
@@ -16,50 +34,49 @@ Transaction* Searching::searchByID(
         current = current->next;
     }
 
-    cout << "Transaction not found.\n";
     return nullptr;
 }
 
-void Searching::searchByCategory(
-    TransactionList& transactions, const string& category)
+int Searching::searchByCategory(TransactionList& transactions, const string& category)
 {
+    int found = 0;
     TransactionNode* current = transactions.getHead();
-    bool found = false;
 
     while (current != nullptr)
     {
-        if (current->data.getCategory() == category)
+        if (equalsIgnoreCase(current->data.getCategory(), category))
         {
             current->data.displayTransaction();
-            cout << "----------------------\n";
-            found = true;
+            cout << "-----------------------------" << endl;
+            found++;
         }
-
         current = current->next;
     }
 
-    if (!found)
-        cout << "No transactions found for this category.\n";
+    if (found == 0)
+        cout << "No transactions found in category \"" << category << "\"." << endl;
+
+    return found;
 }
 
-void Searching::searchByType(
-    TransactionList& transactions, const string& type)
+int Searching::searchByType(TransactionList& transactions, const string& type)
 {
+    int found = 0;
     TransactionNode* current = transactions.getHead();
-    bool found = false;
 
     while (current != nullptr)
     {
-        if (current->data.getType() == type)
+        if (equalsIgnoreCase(current->data.getType(), type))
         {
             current->data.displayTransaction();
-            cout << "----------------------\n";
-            found = true;
+            cout << "-----------------------------" << endl;
+            found++;
         }
-
         current = current->next;
     }
 
-    if (!found)
-        cout << "No transactions found for this type.\n";
+    if (found == 0)
+        cout << "No " << type << " transactions found." << endl;
+
+    return found;
 }
