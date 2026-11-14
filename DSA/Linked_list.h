@@ -23,6 +23,12 @@ private:
 
 public:
     TransactionList();
+    ~TransactionList();   // frees every node
+
+    // Copying is disabled: a default copy would make two lists share the same
+    // nodes, and both destructors would then delete them (double free).
+    TransactionList(const TransactionList&) = delete;
+    TransactionList& operator=(const TransactionList&) = delete;
 
     void insert(const Transaction& transaction);
 
