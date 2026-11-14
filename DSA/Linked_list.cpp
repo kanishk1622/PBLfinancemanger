@@ -8,6 +8,16 @@ TransactionList::TransactionList()
     head = nullptr;
 }
 
+TransactionList::~TransactionList()
+{
+    while (head != nullptr)
+    {
+        TransactionNode* temp = head;
+        head = head->next;
+        delete temp;
+    }
+}
+
 void TransactionList::insert(const Transaction& transaction)
 {
     TransactionNode* newNode = new TransactionNode(transaction);
