@@ -1,0 +1,94 @@
+{
+    "tasks": [
+        {
+            "type": "cppbuild",
+            "label": "Build Finance Manager (all files)",
+            "command": "C:\\MinGW\\bin\\g++.exe",
+            "args": [
+                "-fdiagnostics-color=always",
+                "-g",
+                "-std=c++14",
+                "-Wall",
+                "-static-libgcc",
+                "-static-libstdc++",
+                "main.cpp",
+                "FinanceSystem.cpp",
+                "Account/Account.cpp",
+                "Budgets/Budget.cpp",
+                "Transactions/transactions.cpp",
+                "Goals/goals.cpp",
+                "Investment/investment.cpp",
+                "DSA/Linked_list.cpp",
+                "DSA/Sorting.cpp",
+                "DSA/Searching.cpp",
+                "DSA/Stack.cpp",
+                "DSA/Queue.cpp",
+                "DSA/HashTable.cpp",
+                "DSA/Heap.cpp",
+                "-o",
+                "${workspaceFolder}\\main.exe"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "detail": "Compiles every source file of the project into main.exe in the project folder."
+        },
+        {
+            "type": "cppbuild",
+            "label": "Build web server (server.exe)",
+            "command": "C:\\MinGW\\bin\\g++.exe",
+            "args": [
+                "-fdiagnostics-color=always",
+                "-g",
+                "-std=c++14",
+                "-Wall",
+                "-static-libgcc",
+                "-static-libstdc++",
+                "server.cpp",
+                "FinanceSystem.cpp",
+                "Account/Account.cpp",
+                "Budgets/Budget.cpp",
+                "Transactions/transactions.cpp",
+                "Goals/goals.cpp",
+                "Investment/investment.cpp",
+                "DSA/Linked_list.cpp",
+                "DSA/Sorting.cpp",
+                "DSA/Searching.cpp",
+                "DSA/Stack.cpp",
+                "DSA/Queue.cpp",
+                "DSA/HashTable.cpp",
+                "DSA/Heap.cpp",
+                "-o",
+                "${workspaceFolder}\\server.exe",
+                "-lws2_32"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": "build",
+            "detail": "Compiles the web version into server.exe. Run it from the project folder and open http://localhost:8080"
+        },
+        {
+            "type": "shell",
+            "label": "Build React frontend (web-app -> web)",
+            "command": "npm install && npm run build",
+            "options": {
+                "cwd": "${workspaceFolder}/web-app"
+            },
+            "problemMatcher": [],
+            "group": "build",
+            "detail": "Needs Node.js. Installs the React libraries (first time) and builds the site into web/, which server.exe serves."
+        }
+    ],
+    "version": "2.0.0"
+}
