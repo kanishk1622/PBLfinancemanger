@@ -57,7 +57,8 @@ int TransactionQueue::size() const
 void TransactionQueue::clear()
 {
     front = 0;
-    rear = CAPACITY - 1;  
+    rear = CAPACITY - 1;   // so the first enqueue puts the item at index 0
+    count = 0;
 }
 
 void TransactionQueue::display() const

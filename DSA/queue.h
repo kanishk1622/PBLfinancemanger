@@ -3,11 +3,10 @@
 
 #include "../Transactions/transactions.h"
 
-
 class TransactionQueue
 {
 public:
-    static const int CAPACITY = 100;
+    static const int CAPACITY = 500;
 
 private:
     Transaction items[CAPACITY];
@@ -19,7 +18,7 @@ public:
     TransactionQueue();
 
     bool enqueue(const Transaction& transaction);   
-    bool dequeue(Transaction& transaction);         
+    bool dequeue(Transaction& transaction);        
     bool peek(Transaction& transaction) const;      
 
     bool isEmpty() const;
