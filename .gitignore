@@ -1,0 +1,16 @@
+
+main.exe
+server.exe
+
+
+Data/*
+!Data/.gitkeep
+
+
+tests/
+
+
+web-app/node_modules/
+
+
+~$*
