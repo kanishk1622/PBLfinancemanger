@@ -6,6 +6,7 @@ using namespace std;
 TransactionList::TransactionList()
 {
     head = nullptr;
+    tail = nullptr;
 }
 
 TransactionList::~TransactionList()
@@ -16,25 +17,22 @@ TransactionList::~TransactionList()
         head = head->next;
         delete temp;
     }
+    tail = nullptr;
 }
 
-void TransactionList::insert(const Transaction& transaction)
+Transaction* TransactionList::insert(const Transaction& transaction)
 {
     TransactionNode* newNode = new TransactionNode(transaction);
     if (head == nullptr)
     {
-        head = newNode;
-        return;
+        head = newNode;   // empty list: the new node is both first and last
+        tail = newNode;
+        return &newNode->data;
     }
 
-    TransactionNode* temp = head;
-
-    while (temp->next != nullptr)
-    {
-        temp = temp->next;
-    }
-
-    temp->next = newNode;
+    tail->next = newNode;   // link after the current last node
+    tail = newNode;         // the new node is now the last one
+    return &newNode->data;
 }
 
 bool TransactionList::remove(int transactionId)
@@ -50,6 +48,9 @@ bool TransactionList::remove(int transactionId)
         TransactionNode* temp = head;
         head = head->next;
 
+        if (head == nullptr)
+            tail = nullptr;   // that was the only node: the list is now empty
+
         delete temp;
 
         return true;
@@ -64,6 +65,9 @@ bool TransactionList::remove(int transactionId)
             TransactionNode* temp = current->next;
 
             current->next = temp->next;
+
+            if (temp == tail)
+                tail = current;   // removed the last node: the one before it is now last
 
             delete temp;
 

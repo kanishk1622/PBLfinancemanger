@@ -20,6 +20,8 @@ class TransactionList
 {
 private:
     TransactionNode* head;
+    TransactionNode* tail;   // last node: lets insert() add at the end in O(1)
+                             // (nullptr when the list is empty)
 
 public:
     TransactionList();
@@ -30,7 +32,7 @@ public:
     TransactionList(const TransactionList&) = delete;
     TransactionList& operator=(const TransactionList&) = delete;
 
-    void insert(const Transaction& transaction);
+    Transaction* insert(const Transaction& transaction);   // returns the stored copy
 
     bool remove(int transactionId);
 
