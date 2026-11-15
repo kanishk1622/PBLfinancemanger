@@ -46,6 +46,8 @@ void Goal::createGoal()
     while (!(cin >> goalId) || goalId <= 0)
     {
         cout << "Invalid ID. Enter a positive whole number: ";
+        if (cin.eof())
+            return;   // input closed (e.g. Ctrl+Z): stop instead of looping forever
         cin.clear();
         cin.ignore(1000, '\n');
     }
@@ -55,6 +57,8 @@ void Goal::createGoal()
     getline(cin, goalName);
     while (goalName.empty())
     {
+        if (cin.eof())
+            return;   // input closed: stop instead of looping forever
         cout << "Goal name cannot be empty. Enter Goal Name: ";
         getline(cin, goalName);
     }
@@ -63,6 +67,8 @@ void Goal::createGoal()
     while (!(cin >> targetAmount) || targetAmount <= 0)
     {
         cout << "Invalid amount. Enter a number greater than 0: Rs. ";
+        if (cin.eof())
+            return;   // input closed (e.g. Ctrl+Z): stop instead of looping forever
         cin.clear();
         cin.ignore(1000, '\n');
     }
@@ -71,6 +77,8 @@ void Goal::createGoal()
     while (!(cin >> currentSavings) || currentSavings < 0)
     {
         cout << "Invalid savings. Enter 0 or a positive amount: Rs. ";
+        if (cin.eof())
+            return;   // input closed (e.g. Ctrl+Z): stop instead of looping forever
         cin.clear();
         cin.ignore(1000, '\n');
     }
@@ -79,6 +87,8 @@ void Goal::createGoal()
     while (!(cin >> monthlySaving) || monthlySaving < 0)
     {
         cout << "Invalid monthly saving. Enter 0 or a positive amount: Rs. ";
+        if (cin.eof())
+            return;   // input closed (e.g. Ctrl+Z): stop instead of looping forever
         cin.clear();
         cin.ignore(1000, '\n');
     }
@@ -88,6 +98,8 @@ void Goal::createGoal()
     getline(cin, targetDate);
     while (!validDateFormat(targetDate))
     {
+        if (cin.eof())
+            return;   // input closed: stop instead of looping forever
         cout << "Invalid date format. Example: 25-12-2026. Enter again: ";
         getline(cin, targetDate);
     }
@@ -103,6 +115,8 @@ void Goal::updateGoal()
     while (!(cin >> currentSavings) || currentSavings < 0)
     {
         cout << "Invalid savings. Enter 0 or a positive amount: Rs. ";
+        if (cin.eof())
+            return;   // input closed (e.g. Ctrl+Z): stop instead of looping forever
         cin.clear();
         cin.ignore(1000, '\n');
     }
@@ -111,6 +125,8 @@ void Goal::updateGoal()
     while (!(cin >> monthlySaving) || monthlySaving < 0)
     {
         cout << "Invalid monthly saving. Enter 0 or a positive amount: Rs. ";
+        if (cin.eof())
+            return;   // input closed (e.g. Ctrl+Z): stop instead of looping forever
         cin.clear();
         cin.ignore(1000, '\n');
     }
